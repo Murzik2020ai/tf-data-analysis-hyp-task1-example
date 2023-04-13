@@ -36,4 +36,4 @@ def solution(x_success: int,
     # расчитаем z-метку, которая распределена нормально
     z = (p2 - p1)/ ((p*(1-p)*((1/x_cnt) + (1/y_cnt)))**0.5)    
     p_value = norm.cdf(z)
-    return True if p_value < level else False
+    return True if 2 * p_value < level else False
