@@ -4,32 +4,18 @@ import numpy as np
 
 chat_id = 1226526788
 
-from scipy.stats import chi2_contingency
+from scipy import stats
+from statsmodels.stats.proportion import proportions_ztest
+
 
 def solution(x_success: int, 
              x_cnt: int, 
              y_success: int, 
-             y_cnt: int,
-            level=0.03) -> bool:
-    '''
-    Мы тестируем новый способ продажи и ожидаем повышения конверсии в тестовой группе.
-    Составьте критерий с уровнем значимости 0.03 который позволит по данным теста 
-    принять решение о масштабировании теста.
-    ----
-    x_success: int
-        количество покупок в первой выборке
-    x_cnt: int
-        количество заявок в первой выборке
-    y_success: int
-        количество покупок во второй выборке
-    y_cnt: int
-        количество заявок во второй выборке
-    Returns
-    ----
-    bool
-        Возвращаемое значение: bool-значение, ответ на вопрос: "Отклонить гипотезу"
-    '''
-    arr = np.array([[x_success,x_cnt - x_success],[y_success,y_cnt - y_success]])
-    chi2, p_value, dof, exp = chi2_contingency(arr,correction=False)
-    #print('{:.12f}'.format(p_value))
-    return True if p_value < level else False
+             y_cnt: int) -> bool:
+    # Измените код этой функции
+    # Это будет вашим решением
+    # Не меняйте название функции и её аргументы
+    alpha = 0.03
+    stats, p_value = proportions_ztest(np.array([x_success, y_success]), np.array([x_cnt, y_cnt]), alternative = 'smaller')
+    #print('{:.12f}'.format(1 - p_value))
+    return True if p_value < alpha else False
